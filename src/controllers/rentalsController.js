@@ -1,4 +1,4 @@
-import { db } from "../configs/database";
+import { db } from "../configs/database.js";
 
 async function getAllRentals(req, res) {
     try {

@@ -1,4 +1,4 @@
-import customersSchema from "../schemas/custumersSchema";
+import customersSchema from "../schemas/custumersSchema.js";
 
 export async function validateCustomerSchema(req, res, next) {
     const { name, phone, cpf, birthday } = req.body

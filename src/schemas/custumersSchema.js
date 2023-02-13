@@ -5,7 +5,7 @@ export const customersSchema = joi.object({
     ).required(),
     phone: joi.string().min(10).max(11).required(),
     name: joi.string().min(2).required(),
-    birthday: joi.string().date().required()
+    birthday: joi.date().required()
 });
 
 export default customersSchema;

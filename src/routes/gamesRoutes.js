@@ -6,4 +6,4 @@ const gamesRouters = Router()
 gamesRouters.get('/games', getGames)
 gamesRouters.post('/games',  postGame)
 
-export default gamesRouters
+export {gamesRouters} 
