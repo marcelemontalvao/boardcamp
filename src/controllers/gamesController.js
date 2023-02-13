@@ -26,27 +26,14 @@ async function postGame(req, res) {
             })
         }
 
-        const gameData = {
-            name,
-            image,
-            stockTotal,
-            pricePerDay,
-        }
-
-        const query = ` 
+        await db.query(
+            `
             INSERT INTO 
-                games(name, image, stockTotal, pricePerDay)
-            VALUES
-                ($1, $2, $3, $4)
-            RETURNING *;
-        `
-        
-        let queryConfig = {
-            text: query,
-            values: Object.values(gameData)
-        }
+                games (name, image, "stockTotal", "pricePerDay")
+            VALUES 
+                ($1, $2, $3, $4);
+        `, [name, image, stockTotal, pricePerDay])
 
-        await db.query(queryConfig)
         return res.status(201).send()
     } catch (error) {
         console.error(error)
