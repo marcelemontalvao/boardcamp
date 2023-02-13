@@ -32,7 +32,6 @@ async function postGame(req, res) {
             stockTotal,
             pricePerDay,
         }
-
         const query = ` 
             INSERT INTO 
                 games(name, image, stockTotal, pricePerDay)
