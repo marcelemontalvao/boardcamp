@@ -1,15 +1,38 @@
 import { db } from "../configs/database.js";
 
-async function getAllRentals(req, res) {
+export async function getRentals(_req, res) {
     try {
-        const rentals = await db.query("SELECT * FROM rentals");
-        res.send(rentals.rows);
+      const rentals = await db.query(`
+        SELECT
+            rentals.*,
+            customers.id AS "customer.id",
+            customers.name AS "customer.name",
+            games.id AS "game.id",
+            games.name AS "game.name"
+        FROM
+            rentals
+            JOIN customers ON rentals."customerId" = customers.id
+            JOIN games ON rentals."gameId" = games.id;
+      `);
+  
+      const transformedRentals = rentals.rows.map(rental => {
+        return {
+          ...rental,
+          customer: {
+            id: rental["customer.id"],
+            name: rental["customer.name"]
+          },
+          game: {
+            id: rental["game.id"],
+            name: rental["game.name"]
+          }
+        };
+      });
+  
+      res.send(transformedRentals);
     } catch (err) {
-        console.log(err.message)
-        res.status(500).json({
-            message: "Internal Server Error"
-        });
+      res.sendStatus(500);
     }
 }
-
+  
 export { getAllRentals }
