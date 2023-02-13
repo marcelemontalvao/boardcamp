@@ -14,7 +14,7 @@ async function postGame(req, res) {
         const { name, image, stockTotal, pricePerDay } = req.body
 
         if(!name || stockTotal < 0 || pricePerDay < 0) {
-            return res.status(404).send()
+            return res.status(400).send()
         }
 
         const nameQuery = `SELECT name FROM games WHERE name = $1;`
