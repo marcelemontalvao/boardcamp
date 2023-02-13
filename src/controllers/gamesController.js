@@ -13,7 +13,7 @@ async function postGame(req, res) {
     try {
         const { name, image, stockTotal, pricePerDay } = req.body
 
-        if(!name || stockTotal <= 0 || pricePerDay < 0) {
+        if(!name || stockTotal <= 0 || pricePerDay <= 0) {
             return res.status(400).send()
         }
 
