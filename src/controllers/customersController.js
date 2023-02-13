@@ -74,7 +74,8 @@ async function putCustomer(req, res) {
     const id = req.params.id
     const query = `SELECT * FROM customers WHERE id = $1;`
     const queryResult = await db.query(query, [id])
-    const { name, phone, cpf, birthday } = queryResult.rows[0]
+    const { name, phone, cpf, birthday } = req.body
+
     try {
       await db.query(
         "UPDATE customers SET name=$1, phone=$2, cpf=$3, birthday=$4 WHERE id = $5",

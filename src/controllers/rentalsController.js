@@ -1,6 +1,6 @@
 import { db } from "../configs/database.js";
 
-export async function getRentals(_req, res) {
+async function getAllRentals( req, res) {
     try {
       const rentals = await db.query(`
         SELECT
