@@ -81,4 +81,22 @@ async function postRental(req, res) {
     }
 }
 
-export { getAllRentals, postRental }
+async function deleteRental(req, res) {
+    const rentalId = Number(req.params.id);
+    
+    try {
+    const deleteRental = await db.query('DELETE FROM rentals WHERE id = $1', [
+        rentalId,
+        ]);
+    if (deleteRental.rowCount === 1) {
+        return res.sendStatus(200);
+    } else {
+        return res.sendStatus(404);
+    }
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+}
+
+export { getAllRentals, postRental, deleteRental }
