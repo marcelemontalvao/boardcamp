@@ -54,7 +54,12 @@ async function postCustomer(req, res) {
             RETURNING *;
         `
 
-        const customer = await db.query(query, Object.values(customerData))
+        let queryConfig = {
+            text: query,
+            values: Object.values(customerData)
+        }
+
+        const customer = await db.query(queryConfig)
         res.locals.customer = customer
         return res.status(201).send()
     } catch (error) {
