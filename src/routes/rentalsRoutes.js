@@ -6,4 +6,4 @@ const rentalsRouters = Router()
 rentalsRouters.get('/rentals', getAllRentals)
 rentalsRouters.post('/rentals',  postRental)
 
-export {rentalsRouters} 
+export { rentalsRouters } 
